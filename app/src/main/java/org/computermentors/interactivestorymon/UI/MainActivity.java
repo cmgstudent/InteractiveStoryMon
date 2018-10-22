@@ -1,11 +1,14 @@
-package org.computermentors.interactivestorymon;
+package org.computermentors.interactivestorymon.UI;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.computermentors.interactivestorymon.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +28,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = nameEditText.getText().toString().trim();
                 Toast.makeText(MainActivity.this, name, Toast.LENGTH_LONG).show();
+
+                startStory(name);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nameEditText.setText("");
+    }
+
+    private void startStory(String name){
+        Intent intent = new Intent(MainActivity.this, StoryActivity.class);
+        intent.putExtra("name", name);
+        startActivity(intent);
     }
 }
